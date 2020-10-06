@@ -17,6 +17,7 @@ public class ScoreModel {
 
     public void setNextWinner(String winner) {
         //TODO Implement this method.
+        winners.add(0,winner);
     }
 
 }

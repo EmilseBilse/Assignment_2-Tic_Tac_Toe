@@ -7,13 +7,17 @@ import tictactoe.gui.controller.TicTacViewController;
  * It is used for games where there are two human players.
  */
 public class GameBoardTwoPlayer implements IGameModel {
-    private boolean isPlayerOne = true;
-    private int playCounter = 0;
-    String[] plays = {"","","","","","","","",""};
+    private boolean isPlayerOne;
+    private String[] plays;
+
+    private final int COLS = 3;
+    private final int ROWS = 3;
+    private int availableSlots;
 
     protected GameBoardTwoPlayer() {
-
+        newGame();
     }
+
 
     /**
      * Returns 0 for player 0, 1 for player 1.
@@ -22,7 +26,6 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public int getNextPlayer() {
-        //TODO Implement this method
         if(isPlayerOne){
             return 0;
         }else {
@@ -42,44 +45,14 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public boolean play(int col, int row) {
-        //TODO Implement this method
-        String colRowName = col + " " + row;
-        System.out.println(colRowName);
-        for (String playName : plays) {
-
-            System.out.println(playName);
-            if (playName == colRowName) {
-                System.out.println("false");
-
-                return false;
-            }
-        }
-        if(plays[playCounter] == "") {
-            plays[playCounter] = col + " " + row;
-            playCounter++;
-    //        System.out.println("thing in array[playcounter]: " + plays[playCounter - 1]);
-      //      System.out.println("playcounter: " + (playCounter - 1));
-            System.out.println("true");
+        if(plays[col + row * COLS] == null && isGameOver() == false){
+            plays[col + row * COLS] = (getNextPlayer() == 0) ? "X" : "O";
+            isPlayerOne = !isPlayerOne;
+            availableSlots -= 1;
             return true;
-        }else
-            System.out.println("should not happen");
-            return true;
-
-        /**if(plays[playCounter] == null){
-
-            plays[playCounter] = col + " " + row;
-            playCounter++;
-            System.out.println(plays[playCounter - 1]);
-            System.out.println(playCounter);
-
-            return true;
-
-        }else{
-            System.out.println("fuck you");
+        }else {
             return false;
-        }*/
-
-
+        }
     }
 
     /**
@@ -90,8 +63,11 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public boolean isGameOver() {
-        //TODO Implement this method
-        return false;
+        if(availableSlots <= 0 || getWinner() == 0 || getWinner() == 1){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
@@ -101,7 +77,68 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public int getWinner() {
-        //TODO Implement this method
+        //vandret
+        if(plays[0] == plays[1] && plays[1] == plays[2] && plays[0] == plays[2] && plays[0] != null){
+            if(plays[0] == "X"){
+                return 0;
+            }else{
+                return 1;
+            }
+        }
+        if(plays[3] == plays[4] && plays[4] == plays[5] && plays[3] == plays[5] && plays[3] != null){
+            if(plays[3] == "X"){
+                return 0;
+            }else{
+                return 1;
+            }
+        }
+        if(plays[6] == plays[7] && plays[7] == plays[8] && plays[6] == plays[8] && plays[6] != null){
+            if(plays[6] == "X"){
+                return 0;
+            }else{
+                return 1;
+            }
+        }
+
+        //lodret
+        if(plays[0] == plays[3] && plays[3] == plays[6] && plays[6] == plays[0] && plays[0] != null){
+            if(plays[0] == "X"){
+                return 0;
+            }else{
+                return 1;
+            }
+        }
+
+        if(plays[1] == plays[4] && plays[4] == plays[7] && plays[7] == plays[1] && plays[1] != null){
+            if(plays[1] == "X"){
+                return 0;
+            }else{
+                return 1;
+            }
+        }
+        if(plays[2] == plays[5] && plays[5] == plays[8] && plays[8] == plays[2] && plays[2] != null){
+            if(plays[2] == "X"){
+                return 0;
+            }else{
+                return 1;
+            }
+        }
+
+        //diagonalt
+        if(plays[0] == plays[4] && plays[4] == plays[8] && plays[8] == plays[0] && plays[0] != null){
+            if(plays[0] == "X"){
+                return 0;
+            }else{
+                return 1;
+            }
+        }
+        if(plays[2] == plays[4] && plays[4] == plays[6] && plays[6] == plays[2] && plays[2] != null){
+            if(plays[2] == "X"){
+                return 0;
+            }else{
+                return 1;
+            }
+        }
         return -1;
     }
 
@@ -110,7 +147,9 @@ public class GameBoardTwoPlayer implements IGameModel {
      */
     @Override
     public void newGame() {
-        //TODO Implement this method
+        availableSlots = ROWS * COLS;
+        plays = new String[9];
+        isPlayerOne = true;
     }
 
 }
