@@ -1,13 +1,16 @@
 package tictactoe.bll;
 
+
+
 /**
  * The GameBoardSinglePlayer class is the optional and advanced implementation for the TicTacToe assignment.
  * It is used for games where there are one human player vs. a computer player.
  */
 public class GameBoardSinglePlayer implements IGameModel {
 
-    protected GameBoardSinglePlayer() {
 
+    protected GameBoardSinglePlayer() {
+        newGame();
     }
 
     /**
@@ -17,8 +20,7 @@ public class GameBoardSinglePlayer implements IGameModel {
      */
     @Override
     public int getNextPlayer() {
-        //TODO Implement this method
-        return 0;
+        return -1;
     }
 
     /**
@@ -33,8 +35,7 @@ public class GameBoardSinglePlayer implements IGameModel {
      */
     @Override
     public boolean play(int col, int row) {
-        //TODO Implement this method
-        return false;
+        return true;
     }
 
     /**
@@ -45,8 +46,7 @@ public class GameBoardSinglePlayer implements IGameModel {
      */
     @Override
     public boolean isGameOver() {
-        //TODO Implement this method
-        return false;
+        return true;
     }
 
     /**
@@ -56,8 +56,7 @@ public class GameBoardSinglePlayer implements IGameModel {
      */
     @Override
     public int getWinner() {
-        //TODO Implement this method
-        return 0;
+        return -1;
     }
 
     /**
@@ -65,6 +64,6 @@ public class GameBoardSinglePlayer implements IGameModel {
      */
     @Override
     public void newGame() {
-        //TODO Implement this method
+
     }
 }
